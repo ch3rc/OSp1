@@ -15,6 +15,8 @@ Class:		Operating Systems (CS4760)
    line write 'make clean'
 4. commands are as follows: 'bt' or 'bt <filename>' or 
    'bt <commands> <filename>'
+5. To enter into another director '../' will have to be added to
+   the filename.
 bt: runs executable in combination with command flags and filename.
     If no filename is provided the current working directory is
     traversed
