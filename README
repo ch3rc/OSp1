@@ -39,4 +39,8 @@ https://github.com/ch3rc/OSp1
 Had issues formatting st_mtime. Tried to strftime() which was able
 to give a month and day but would always cut off the year. Ended
 up using full date of st_mtime instead.
+
+Issues with pushing files to github. had under personal account at
+first and would not push. had to remove git directory twice and
+create new account under school email to push properly.
 --------------------------------------------------------------------
