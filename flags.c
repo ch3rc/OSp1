@@ -49,7 +49,6 @@ void allTpuigs()
 
 void setOptions(int argc, char *argv[])
 {
-	int i;
 	int c;
 
 	while((c = getopt(argc, argv, "hLtpiugsdl")) != -1)
