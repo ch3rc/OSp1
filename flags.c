@@ -105,36 +105,17 @@ void setOptions(int argc, char *argv[])
 			}
 
 	}
-
+	
+	//if file name is given save as dirname else default to current working directory
 	if(optind < argc)
 	{
 		dirname = argv[optind];
-		printf("test of dirname: %s\n", dirname);
 	}
 
 	if(dirname == NULL)
 	{
 		dirname = ".";
-		printf("dirname was null: %s\n", dirname);
 	}
-
-}
-
-
-void print()
-{
-
-	printf("-h = %d\n", h_helpmessage);
-	printf("-L = %d\n", L_symbolic);
-	printf("-t = %d\n", t_fileType);
-	printf("-p = %d\n", p_permissions);
-	printf("-i = %d\n", i_links);
-	printf("-u = %d\n", u_uid);
-	printf("-g = %d\n", g_gid);
-	printf("-s = %d\n", s_filesize);
-	printf("-d = %d\n", d_lastmod);
-	printf("-l = %d\n", l_allflags);
-	printf("dirname = %s\n", dirname);
 
 }
 

@@ -7,12 +7,15 @@
 //===================================================================
 
 #include "bfs.h"
+#include "fileinfo.h"
 
+//check if q is empty
 int isEmpty(struct queue *q)
 {
 	return !(q->index);
 }
 
+//create a queue node
 struct queue *makeQ()
 {
 	struct queue *q = (struct queue *)malloc(sizeof(struct queue));
@@ -22,6 +25,7 @@ struct queue *makeQ()
 	return q;
 }
 
+//intialize node if new, if already created add adjacent paths
 void enqueue(struct queue *q, char *path)
 {
 	struct node *newNode = (struct node *)malloc(sizeof(struct node));
@@ -37,6 +41,7 @@ void enqueue(struct queue *q, char *path)
 	q->index++;
 }
 
+//pop of traversed path and move to next
 struct node *dequeue(struct queue *q)
 {
 	struct node *temp;
@@ -46,6 +51,7 @@ struct node *dequeue(struct queue *q)
 	return temp;
 }
 
+//concat prevoius path and newpath
 static char *concatPath(long parent, long child, char *start, const char *next)
 {
 	char *temp = (char *)malloc(sizeof(parent + child + 2));
@@ -58,15 +64,22 @@ static char *concatPath(long parent, long child, char *start, const char *next)
 
 void breadthfirst(char *path)
 {
-	DIR *dp;
+	DIR *dp, *dir;
 	struct dirent *entry;
 	struct stat fileStat;
 	struct queue *q;
 	char *name;
 	long len_parent, len_child;
 	
+	//create queue and intialize
 	q = makeQ();
 	enqueue(q, path);
+	
+	//get first path information
+	dir = opendir(path);
+	fileInfoBuilder(path);
+	show();
+	closedir(dir);
 
 	while(!isEmpty(q))
 	{
@@ -76,6 +89,7 @@ void breadthfirst(char *path)
 		len_parent = strlen(next->dirname);
 		while((entry = readdir(dp)) != NULL)
 		{
+			//ignore current, parent and git repository
 			if((strcmp(entry->d_name, ".") != 0) && (strcmp(entry->d_name, "..") != 0) && (strcmp(entry->d_name, ".git") != 0))
 			{
 				len_child = strlen(entry->d_name);
@@ -90,12 +104,16 @@ void breadthfirst(char *path)
 				{
 					if(S_ISDIR(fileStat.st_mode))
 					{
-						enqueue(q, name);
-						printf("directory:%s\n", name);
+						//add next path to queue and show info if directory
+						enqueue(q, name);	
+						fileInfoBuilder(name);
+						show();
 					}
 					else
 					{
-						printf("file:%s\n", name);
+						//if file show information	
+						fileInfoBuilder(name);
+						show();
 						free(name);
 					}
 				}

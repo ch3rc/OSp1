@@ -1,1 +1,40 @@
-first commit
+-------------------------------------------------------------------
+			Project 1
+-------------------------------------------------------------------
+Date:		Februray 10,2020
+Author:		Cody Hawkins
+Class:		Operating Systems (CS4760)
+-------------------------------------------------------------------
+		     COMPILE and RUN
+1. Run 'make'
+
+2. To make 'bt' executable without having to type "./" 
+   on the command write alias bt="./bt" . Everytime
+   'make' is run alias will set bt as ./bt
+3. To remove executable and object files on the command
+   line write 'make clean'
+4. commands are as follows: 'bt' or 'bt <filename>' or 
+   'bt <commands> <filename>'
+bt: runs executable in combination with command flags and filename.
+    If no filename is provided the current working directory is
+    traversed
+-h: shows help message
+-L: shows symbolic links
+-t: shows file types
+-p: shows file permission bits
+-i: shows inode links
+-u: shows user id information
+-g: shows group id information
+-s: shows file size
+-d: shows the time of last modification
+-l: shows -p -i -u -g -s -d information of file
+--------------------------------------------------------------------
+			FILE LOGS
+to view history of source files:
+https://github.com/ch3rc/OSp1
+--------------------------------------------------------------------
+			    ISSUES
+Had issues formatting st_mtime. Tried to strftime() which was able
+to give a month and day but would always cut off the year. Ended
+up using full date of st_mtime instead.
+--------------------------------------------------------------------

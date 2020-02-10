@@ -15,6 +15,7 @@
 
 char fileinfo[MAX] = "";
 
+//concat file information to fileinfo string
 static void catString(const char *s)
 {
 	strcat(fileinfo, s);
@@ -36,7 +37,7 @@ void help()
 	printf("-l: Print info on file as if all tpiugs are initialized\n");
 }
 
-
+//get size of file
 static char *bytes(const int filesize)
 {
 	char *size = (char *)malloc(500);
@@ -78,7 +79,7 @@ void fileInfoBuilder(const char *path)
 		exit(EXIT_FAILURE);
 	}
 
-	//check for symbolic links. TODO: create symbolic links to check
+	//check for symbolic links.
 	if(L_symbolic)
 	{	
 		
@@ -95,6 +96,7 @@ void fileInfoBuilder(const char *path)
 			{
 				catString("symL:");
 				catString(buf);
+				catString("  ");
 			}
 		}	
 	
@@ -199,10 +201,11 @@ void fileInfoBuilder(const char *path)
 
 	//date of last modification
 	if(d_lastmod)
-	{
+	{	
+		//get time and remove newline character
 		char mtime[CTIME];
 		strncpy(mtime, ctime(&statbuf.st_mtime), CTIME - 1);
-		mtime[CTIME - 2] = 0;
+		mtime[CTIME - 2] = 0; 
 		catString(mtime);
 		catString("  ");
 	}
